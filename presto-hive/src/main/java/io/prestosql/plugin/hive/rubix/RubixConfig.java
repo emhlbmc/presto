@@ -16,25 +16,14 @@ package io.prestosql.plugin.hive.rubix;
 import com.qubole.rubix.spi.CacheConfig;
 import io.airlift.configuration.Config;
 
+import javax.validation.constraints.NotNull;
+
 public class RubixConfig
 {
-    private boolean cacheEnabled;
     private boolean parallelWarmupEnabled = true;
-    private String cacheLocation = "/tmp";
+    private String cacheLocation;
     private int bookKeeperServerPort = CacheConfig.DEFAULT_BOOKKEEPER_SERVER_PORT;
     private int dataTransferServerPort = CacheConfig.DEFAULT_DATA_TRANSFER_SERVER_PORT;
-
-    public boolean isCacheEnabled()
-    {
-        return cacheEnabled;
-    }
-
-    @Config("hive.cache.enabled")
-    public RubixConfig setCacheEnabled(boolean value)
-    {
-        this.cacheEnabled = value;
-        return this;
-    }
 
     public boolean isParallelWarmupEnabled()
     {
@@ -48,6 +37,7 @@ public class RubixConfig
         return this;
     }
 
+    @NotNull
     public String getCacheLocation()
     {
         return cacheLocation;
@@ -65,7 +55,7 @@ public class RubixConfig
         return bookKeeperServerPort;
     }
 
-    @Config("hive.cache.rubix-bookkeeper-port")
+    @Config("hive.cache.bookkeeper-port")
     public RubixConfig setBookKeeperServerPort(int port)
     {
         this.bookKeeperServerPort = port;
@@ -77,7 +67,7 @@ public class RubixConfig
         return dataTransferServerPort;
     }
 
-    @Config("hive.cache.rubix-data-transfer-port")
+    @Config("hive.cache.data-transfer-port")
     public RubixConfig setDataTransferServerPort(int port)
     {
         this.dataTransferServerPort = port;

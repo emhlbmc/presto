@@ -5,7 +5,7 @@
     <parent>
         <groupId>io.airlift</groupId>
         <artifactId>airbase</artifactId>
-        <version>98</version>
+        <version>99</version>
     </parent>
 
     <groupId>io.prestosql</groupId>
@@ -485,7 +485,7 @@
             <dependency>
                 <groupId>io.airlift</groupId>
                 <artifactId>aircompressor</artifactId>
-                <version>0.15</version>
+                <version>0.16</version>
             </dependency>
 
             <dependency>
@@ -825,7 +825,7 @@
             <dependency>
                 <groupId>org.apache.avro</groupId>
                 <artifactId>avro</artifactId>
-                <version>1.9.1</version>
+                <version>1.9.2</version>
             </dependency>
 
             <dependency>
@@ -995,12 +995,6 @@
             </dependency>
 
             <dependency>
-                <groupId>io.airlift</groupId>
-                <artifactId>testing-mysql-server</artifactId>
-                <version>8.0.12-2</version>
-            </dependency>
-
-            <dependency>
                 <groupId>com.google.cloud.bigdataoss</groupId>
                 <artifactId>util</artifactId>
                 <version>${dep.gcs.version}</version>
@@ -1032,12 +1026,6 @@
                         <artifactId>slf4j-log4j12</artifactId>
                     </exclusion>
                 </exclusions>
-            </dependency>
-
-            <dependency>
-                <groupId>io.airlift</groupId>
-                <artifactId>testing-postgresql-server</artifactId>
-                <version>9.6.3-3</version>
             </dependency>
 
             <dependency>
@@ -1179,12 +1167,6 @@
             </dependency>
 
             <dependency>
-                <groupId>com.starburstdata</groupId>
-                <artifactId>starburst-spotify-docker-client</artifactId>
-                <version>8.11.7-0.6</version>
-            </dependency>
-
-            <dependency>
                 <groupId>net.jodah</groupId>
                 <artifactId>failsafe</artifactId>
                 <version>2.0.1</version>
@@ -1318,6 +1300,12 @@
                         <preparationGoals>clean verify -DskipTests</preparationGoals>
                     </configuration>
                 </plugin>
+
+                <plugin>
+                    <groupId>ca.vanzyl.provisio.maven.plugins</groupId>
+                    <artifactId>provisio-maven-plugin</artifactId>
+                    <version>1.0.9</version>
+                </plugin>
             </plugins>
         </pluginManagement>
 
@@ -1330,9 +1318,8 @@
             </plugin>
 
             <plugin>
-                <groupId>ca.vanzyl.maven.plugins</groupId>
+                <groupId>ca.vanzyl.provisio.maven.plugins</groupId>
                 <artifactId>provisio-maven-plugin</artifactId>
-                <version>1.0.7</version>
                 <extensions>true</extensions>
             </plugin>
 

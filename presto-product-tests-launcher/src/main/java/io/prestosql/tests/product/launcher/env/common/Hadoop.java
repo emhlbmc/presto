@@ -33,6 +33,7 @@ public final class Hadoop
         implements EnvironmentExtender
 {
     public static final String CONTAINER_PRESTO_HIVE_PROPERTIES = CONTAINER_PRESTO_ETC + "/catalog/hive.properties";
+    public static final String CONTAINER_PRESTO_ICEBERG_PROPERTIES = CONTAINER_PRESTO_ETC + "/catalog/iceberg.properties";
 
     private final DockerFiles dockerFiles;
 
@@ -56,7 +57,8 @@ public final class Hadoop
         builder.addContainer("hadoop-master", createHadoopMaster());
 
         builder.configureContainer("presto-master", container -> container
-                .withFileSystemBind(dockerFiles.getDockerFilesHostPath("common/hadoop/hive.properties"), CONTAINER_PRESTO_HIVE_PROPERTIES, READ_ONLY));
+                .withFileSystemBind(dockerFiles.getDockerFilesHostPath("common/hadoop/hive.properties"), CONTAINER_PRESTO_HIVE_PROPERTIES, READ_ONLY)
+                .withFileSystemBind(dockerFiles.getDockerFilesHostPath("common/hadoop/iceberg.properties"), CONTAINER_PRESTO_ICEBERG_PROPERTIES, READ_ONLY));
     }
 
     @SuppressWarnings("resource")
@@ -70,7 +72,7 @@ public final class Hadoop
                 .withStartupTimeout(Duration.ofMinutes(5));
 
         exposePort(container, 1180); // socks proxy
-        exposePort(container, 5006); // debug port
+        // TODO exposePort(container, 5006); // debug port
         exposePort(container, 8020);
         exposePort(container, 8042);
         exposePort(container, 8088);
